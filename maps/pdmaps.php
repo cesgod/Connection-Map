@@ -352,7 +352,7 @@ function setMarkers(map) {
   var mkr=1;
   for (var i = 0; i < locations.length; i++) {
     
-    dicon= '../images/power.png';
+    dicon= 'images/power.png';
     mkr=mkr+1;
     //console.log('Numm: ',mkr);
     var ipsn=ips[i];
@@ -360,7 +360,7 @@ function setMarkers(map) {
     for (var j = 0; j < unreach.length; j++) {
       var unreachn=unreach[j];
       if (ipsn==unreachn) {
-        dicon= '../images/nosignal.png';
+        dicon= 'images/nosignal.png';
         
       }
       //console.log('ipsn:',ipsn,' unreachn: ',unreach[j],'i: ',i,'j: ',j);
