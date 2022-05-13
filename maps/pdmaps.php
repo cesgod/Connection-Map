@@ -471,7 +471,7 @@ function getPoints() {
 <script type="text/javascript">
 
   function mapupdate(){
-    window.location="http://201.222.49.29//maps/";
+    window.location="http://201.222.49.29//projects/MAPS/maps/";
 
   }
   setTimeout('mapupdate()',60000);

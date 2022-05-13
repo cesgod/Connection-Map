@@ -9,7 +9,7 @@
 #echo "<pre>"; print_r($output[3]); echo "</pre>";
 #var_dump(json_decode($json_string));
 #var_dump(json_decode($json_string, true));
-$stringv = file_get_contents("../../../virtualenvs/Cl/soapclient/locationdata.json");
+$stringv = file_get_contents("locationdata.json");
 
     if ($stringv === false) {
       echo "No content<br>";
