@@ -20,7 +20,7 @@ $output = json_decode($stringv, true);
         // deal with error...
       echo "Parse error<br>";
     }
- 
+  
 $cont=0;
 $a=0;
 $b=0;
