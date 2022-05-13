@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CLYFSA | PDs</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+var markers = [];
+var locations = [
+  ['<h1>CN01</h1> <br> 150kva', -25.782397, -56.445639],
+  ['<h1>CN02</h1> <br> 150kva', -25.782123, -56.447017],
+  ['<h1>CN03</h1> <br> 150kva', -25.781087, -56.442552],
+  ['<h1>CN04</h1> <br> 150kva', -25.780521, -56.446795],
+  ['<h1>CN05</h1> <br> 150kva', -25.780314, -56.445613],
+  ['<h1>CN06</h1> <br> 150kva', -25.778500, -56.445610],
+  ['<h1>CN07</h1> <br> 150kva', -25.779775, -56.449670],
+  ['<h1>CN08</h1> <br> 150kva', -25.776208, -56.452096],
+  ['<h1>CN09</h1> <br> 150kva', -25.779675, -56.447623],
+  ['<h1>CN10</h1> <br> 150kva', -25.778344, -56.449149],
+  ['<h1>CN11</h1> <br> 150kva', -25.776890, -56.449145],
+  ['<h1>CN12</h1> <br> 150kva', -25.776483, -56.446844],
+  ['<h1>CN13</h1> <br> 150kva', -25.776867, -56.445610],
+  ['<h1>CN14</h1> <br> 150kva', -25.778041, -56.442767],
+  ['<h1>CN15</h1> <br> 150kva', -25.779884, -56.443883],
+  ['<h1>CN16</h1> <br> 150kva', -25.778829, -56.443913],
+  ['<h1>CN17</h1> <br> 150kva', -25.784985, -56.448088],
+  ['<h1>CN18</h1> <br> 150kva', -25.785647, -56.452232],
+  ['<h1>CN19</h1> <br> 150kva', -25.786110, -56.450027],
+  ['<h1>CN20</h1> <br> 150kva', -25.783564, -56.450526],
+  ['<h1>CN21</h1> <br> 150kva', -25.781494, -56.449209],
+  ['<h1>CN22</h1> <br> 150kva', -25.783724, -56.442843],
+  ['<h1>CN23</h1> <br> 150kva', -25.781917, -56.452193],
+  ['<h1>CN24</h1> <br> 150kva', -25.779924, -56.452184],
+  ['<h1>CN25</h1> <br> 150kva', -25.782858, -56.448828],
+  ['<h1>CN26</h1> <br> 150kva', -25.787068, -56.444897],
+  ['<h1>CN27</h1> <br> 150kva', -25.783957, -56.445619],
+  ['<h1>CN28</h1> <br> 150kva', -25.785213, -56.444570],
+  ['<h1>CN29</h1> <br> 150kva', -25.782348, -56.450064],
+  ['<h1>CN30</h1> <br> 150kva', -25.780508, -56.447183],
+  ['<h1>CN31</h1> <br> 150kva', -25.783556, -56.453261],
+  ['<h1>CN32</h1> <br> 150kva', -25.778102, -56.452214],
+  ['<h1>CN33</h1> <br> 150kva', -25.778883, -56.447636],
+  ['<h1>CN34</h1> <br> 150kva', -25.780832, -56.445610],
+  ['<h1>CN35</h1> <br> 150kva', -25.776267, -56.450549],
+  ['<h1>CN36</h1> <br> 150kva', -25.787647, -56.450890],
+  ['<h1>CN37</h1> <br> 150kva', -25.779687, -56.448019],
+  ['<h1>CN38</h1> <br> 150kva', -25.783632, -56.448931],
+  ['<h1>CN39</h1> <br> 150kva', -25.786373, -56.441581],
+  ['<h1>CN40</h1> <br> 150kva', -25.783751, -56.441011],
+  ['<h1>CN41</h1> <br> 150kva', -25.778500, -56.450124],
+  ['<h1>CN42</h1> <br> 150kva', -25.776654, -56.453528],
+  ['<h1>CN43</h1> <br> 150kva', -25.778370, -56.446412],
+  ['<h1>CN44</h1> <br> 150kva', -25.780780, -56.449325],
+  ['<h1>CN45</h1> <br> 150kva', -25.782490, -56.443918],
+  ['<h1>CN46</h1> <br> 150kva', -25.779710, -56.445565],
+  ['<h1>CN47</h1> <br> 150kva', -25.784601, -56.451018],
+  ['<h1>CN48</h1> <br> 100kva', -25.787113, -56.443195],
+  ['<h1>CN49</h1> <br> 150kva', -25.776459, -56.447751],
+  ['<h1>CN50</h1> <br> 150kva', -25.778483, -56.450873],
+  ['<h1>CN51</h1> <br> 150kva', -25.780492, -56.441947],
+  ['<h1>CN52</h1> <br> 150kva', -25.785926, -56.444565],
+  ['<h1>CN53</h1> <br> 150kva', -25.778078, -56.447806],
+  ['<h1>CN54</h1> <br> 150kva', -25.778107, -56.453024],
+  ['<h1>CN55</h1> <br> 150kva', -25.785993, -56.442954],
+  ['<h1>CN56</h1> <br> 150kva', -25.785993, -56.442954],
+  ['<h1>SL01</h1> <br> 150kva', -25.791851, -56.455409],
+  ['<h1>SL02</h1> <br> 150kva', -25.791956, -56.449932],
+  ['<h1>SL03</h1> <br> 150kva', -25.796023, -56.449906],
+  ['<h1>SL04</h1> <br> 150kva', -25.795969, -56.448714],
+  ['<h1>SL05</h1> <br> 150kva', -25.795911, -56.445367],
+  ['<h1>SL06</h1> <br> 150kva', -25.792240, -56.447727],
+  ['<h1>SL07</h1> <br> 100kva', -25.792501, -56.442931],
+  ['<h1>SL08</h1> <br> 150kva', -25.790255, -56.448505],
+  ['<h1>SL10</h1> <br> 150kva', -25.788207, -56.452582],
+  ['<h1>SL12</h1> <br> 150kva', -25.788564, -56.444128],
+  ['<h1>SL13</h1> <br> 150kva', -25.788342, -56.448932],
+  ['<h1>SL14</h1> <br> 150kva', -25.788443, -56.446993],
+  ['<h1>SL15</h1> <br> 150kva', -25.816048, -56.441112],
+  ['<h1>SL16</h1> <br> 150kva', -25.793077, -56.445187],
+  ['<h1>SL17</h1> <br> 150kva', -25.793840, -56.450407],
+  ['<h1>SL18</h1> <br> 100kva', -25.790295, -56.441695],
+  ['<h1>SL19</h1> <br> 150kva', -25.788607, -56.453785],
+  ['<h1>SL20</h1> <br> 150kva', -25.796673, -56.449921],
+  ['<h1>SL22</h1> <br> 150kva', -25.797085, -56.445558],
+  ['<h1>SL23</h1> <br> 100kva', -25.797085, -56.445558],
+  ['<h1>SL24</h1> <br> 100kva', -25.800011, -56.449097],
+  ['<h1>SL25</h1> <br> 150kva', -25.792042, -56.444242],
+  ['<h1>SL26</h1> <br> 150kva', -25.800518, -56.452525],
+  ['<h1>SL27</h1> <br> 150kva', -25.790187, -56.454113],
+  //--------------------->
+  ['<h1>SL29</h1> <br> 150kva', -25.797731, -56.453834],
+  //--------------------->
+  ['<h1>FP01</h1> <br> 25kva', -25.781743, -56.415720],
+  ['<h1>FP02</h1> <br> 25kva', -25.785685, -56.416192],
+  ['<h1>FP03</h1> <br> 25kva', -25.784078, -56.412521],
+  ['<h1>FP04</h1> <br> 25kva', -25.778726, -56.420090],
+  ['<h1>FP05</h1> <br> 25kva', -25.785160, -56.412236],
+  ['<h1>FP06</h1> <br> 25kva', -25.782020, -56.411936],
+  ['<h1>FP07</h1> <br> 25kva', -25.784416, -56.409887],
+    //--------------------->
+  ['<h1>IT01</h1> <br> 63kva', -25.807582, -56.429658],
+  ['<h1>IT02</h1> <br> 63kva', -25.811402, -56.426571],
+    //--------------------->
+  ['<h1>SB01</h1> <br> 150kva', -25.779148, -56.430908],
+  ['<h1>SB02</h1> <br> 150kva', -25.782418, -56.433445],
+  ['<h1>SB03</h1> <br> 150kva', -25.783756, -56.435183],
+  ['<h1>SB04</h1> <br> 150kva', -25.785736, -56.440472],
+  ['<h1>SB05</h1> <br> 150kva', -25.782437, -56.440338],
+  ['<h1>SB06</h1> <br> 150kva', -25.787741, -56.438723],
+  ['<h1>SB07</h1> <br> 150kva', -25.781658, -56.430966],
+  ['<h1>SB08</h1> <br> 150kva', -25.781436, -56.433219],
+  ['<h1>SB09</h1> <br> 150kva', -25.781436, -56.433219],
+  ['<h1>SB10</h1> <br> 63kva', -25.778649, -56.425451],
+  ['<h1>SB11</h1> <br> 100kva', -25.781330, -56.427071],
+  ['<h1>SB12</h1> <br> 25kva', -25.790952, -56.424657],
+  ['<h1>SB13</h1> <br> 150kva', -25.787665, -56.439704],
+    //--------------------->
+  ['<h1>SM02</h1> <br> 150kva', -25.770613, -56.436410],
+  ['<h1>SM03</h1> <br> 150kva', -25.772797, -56.434329],
+  ['<h1>SM04</h1> <br> 150kva', -25.772449, -56.431636],
+  ['<h1>SM05</h1> <br> 150kva', -25.774942, -56.433224],
+  ['<h1>SM06</h1> <br> 150kva', -25.774778, -56.437569],
+  ['<h1>SM07</h1> <br> 100kva', -25.778604, -56.436979],
+  ['<h1>SM08</h1> <br> 150kva', -25.777087, -56.434490],
+  ['<h1>SM09</h1> <br> 150kva', -25.780459, -56.438149],
+  ['<h1>SM10</h1> <br> 150kva', -25.780459, -56.438149],
+  ['<h1>SM11</h1> <br> 150kva', -25.779819, -56.440224],
+  ['<h1>SM12</h1> <br> 200kva', -25.773930, -56.439972],
+  ['<h1>SM13</h1> <br> 150kva', -25.774717, -56.434924],
+  ['<h1>SM14</h1> <br> 150kva', -25.777688, -56.440117],
+  ['<h1>SM15</h1> <br> 150kva', -25.770795, -56.438014],
+  ['<h1>SM16</h1> <br> 150kva', -25.774925, -56.431502],
+  ['<h1>SM17</h1> <br> 25kva', -25.773872, -56.427951],
+  ['<h1>SM18</h1> <br> 150kva', -25.767571, -56.436978],
+  ['<h1>SM19</h1> <br> 100kva', -25.773291, -56.432762],
+  ['<h1>SM20</h1> <br> 150kva', -25.771359, -56.438502],
+  ['<h1>SM21</h1> <br> 150kva', -25.773492, -56.437944],
+  ['<h1>SM22</h1> <br> 150kva', -25.769968, -56.439784],
+  ['<h1>SM23</h1> <br> 150kva', -25.780774, -56.436120],
+  ['<h1>SM24</h1> <br> 150kva', -25.766917, -56.439749],
+  ['<h1>SM25</h1> <br> 150kva', -25.778504, -56.438303],
+  ['<h1>SM26</h1> <br> 100kva', -25.778308, -56.434653],
+  ['<h1>SM27</h1> <br> 100kva', -25.776183, -56.438725],
+  ['<h1>SM28</h1> <br> 100kva', -25.768763, -56.438366],
+  ['<h1>SM29</h1> <br> 150kva', -25.766873, -56.432797],
+  ['<h1>SM30</h1> <br> 150kva', -25.775646, -56.435769],
+  ['<h1>SM30</h1> <br> 150kva', -25.775646, -56.435769],
+    //---------------------->
+  ['<h1>YB01</h1> <br> 150kva', -25.772004, -56.441766],
+  ['<h1>YB02</h1> <br> 150kva', -25.767859, -56.444738],
+
+
+  ['<h1>CLYFSA</h1> <br> 100kva', -25.785084, -56.450823],
+
+
+];
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 14.8,
+    center: {lat: -25.775804, lng: -56.448570},
+    styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text",
+    "stylers": [
+      {
+        "color": "#00ffff"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#181818"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#1b1b1b"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8a8a8a"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#373737"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c3c3c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4e4e4e"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d3d3d"
+      }
+    ]
+  }
+]
+  });
+
+  setMarkers(map);
+}
+
+function setMarkers(map) {
+  for (var i = 0; i < locations.length; i++) {
+
+    var location = locations[i];
+    var locationInfowindow = new google.maps.InfoWindow({
+      content: location[0],
+    });
+
+    var marker = new google.maps.Marker({
+      position: {lat: location[1], lng: location[2]},
+      icon: 'http://clyfsa.com/images/power.png',
+      map: map,
+      title: location[0],
+      infowindow: locationInfowindow
+    });
+
+    markers.push(marker);
+
+    google.maps.event.addListener(marker, 'click', function() {
+      hideAllInfoWindows(map);
+      this.infowindow.open(map, this);
+    });
+
+  }
+}
+
+function hideAllInfoWindows(map) {
+   markers.forEach(function(marker) {
+     marker.infowindow.close(map, marker);
+  }); 
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCc861zO5qBpEUVdbJMCePQsubEGhEF7ZU&&callback=initMap"
+    async defer></script>
+</body>
+</html>
